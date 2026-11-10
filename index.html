@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Беляйкин Николай — backend-разработчик</title>
+<meta name="description" content="Backend-разработчик на Python: графовые модели, алгоритмы, симуляторы и пайплайны данных. Хакатоны: 1-е место Сбер × МТУСИ, 3-е место КосмоХакатон.">
+<meta property="og:title" content="Беляйкин Николай — технический паспорт специалиста">
+<meta property="og:description" content="Backend · графы · алгоритмы · данные. Python, FastAPI, PostgreSQL, Docker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1e8; --paper-2:#ebe6d8; --ink:#16181c; --ink-2:#5b5f68; --line:#c9c2ad; --grid:rgba(22,24,28,.055);
+  --accent:#d6461f; --accent-2:#1f4fd6; --ok:#1d8a4e;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace; --sans:Onest,system-ui,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121417; --paper-2:#1a1d22; --ink:#ece8dc; --ink-2:#9a9ea8; --line:#343841; --grid:rgba(236,232,220,.045);
+  --accent:#ff6a3d; --accent-2:#7a9bff; --ok:#3fcf86;
+}}
+:root[data-theme="dark"]{
+  --paper:#121417; --paper-2:#1a1d22; --ink:#ece8dc; --ink-2:#9a9ea8; --line:#343841; --grid:rgba(236,232,220,.045);
+  --accent:#ff6a3d; --accent-2:#7a9bff; --ok:#3fcf86;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.sheet{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.lbl{font:500 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+
+/* штамп-шапка */
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .sheet{display:flex;align-items:center;gap:20px;height:52px}
+.top b{font:700 13px var(--mono);letter-spacing:.08em}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{font:500 12px var(--mono);text-decoration:none;padding:6px 10px;border-radius:6px;color:var(--ink-2)}
+.top nav a:hover{color:var(--ink);background:var(--paper-2)}
+.theme{font:500 12px var(--mono);background:none;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:5px 9px;cursor:pointer}
+
+/* лист 1 */
+.frame{border:1.5px solid var(--ink);margin:40px 0;background:var(--paper);position:relative}
+.frame::before,.frame::after{content:"";position:absolute;width:14px;height:14px;border:1.5px solid var(--accent)}
+.frame::before{top:-8px;left:-8px;border-right:0;border-bottom:0}
+.frame::after{bottom:-8px;right:-8px;border-left:0;border-top:0}
+.fhead{display:flex;justify-content:space-between;gap:16px;padding:10px 18px;border-bottom:1.5px solid var(--ink);font:500 11px var(--mono);letter-spacing:.2em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:1.6fr 1fr;border-bottom:1.5px solid var(--ink)}
+.hero .name{padding:34px 28px;border-right:1.5px solid var(--ink)}
+.hero h1{font:700 clamp(40px,6.4vw,78px)/.95 var(--sans);letter-spacing:-.035em;margin:14px 0 18px;text-transform:uppercase}
+.hero h1 span{display:block;font-weight:500;font-size:.42em;letter-spacing:.02em;color:var(--ink-2);margin-top:12px}
+.cls{font:500 14px var(--mono);color:var(--ink)}
+.cls i{font-style:normal;color:var(--accent)}
+.meta{display:grid;grid-template-rows:repeat(3,1fr)}
+.meta>div{padding:18px 22px;border-bottom:1px solid var(--line)}
+.meta>div:last-child{border-bottom:0}
+.meta p{margin:6px 0 0;font:500 15px var(--mono)}
+.meta a{text-decoration:none;border-bottom:1px dashed var(--ink-2)}
+.meta a:hover{color:var(--accent);border-color:var(--accent)}
+.purpose{padding:24px 28px;display:grid;grid-template-columns:150px 1fr;gap:20px;border-bottom:1.5px solid var(--ink)}
+.purpose p{margin:0;font-size:18px;max-width:72ch}
+.purpose p em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 30%,transparent) 0)}
+
+/* ОТК */
+.otk{display:grid;grid-template-columns:repeat(4,1fr)}
+.stamp{padding:22px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.stamp:last-child{border-right:0}
+.stamp b{font:700 30px/1 var(--mono);letter-spacing:-.02em;color:var(--accent)}
+.stamp b.fin{font-size:22px;padding-top:6px}
+.stamp span{font:600 14px var(--sans)}
+.stamp small{font:400 12px var(--mono);color:var(--ink-2)}
+
+section{scroll-margin-top:64px}
+.sec{margin:64px 0}
+.sec h2{display:flex;align-items:baseline;gap:16px;font:700 clamp(28px,3.4vw,40px)/1.1 var(--sans);letter-spacing:-.025em;margin:0 0 24px}
+.sec h2 .lbl{font-size:12px}
+
+/* характеристики */
+.specs{border:1.5px solid var(--ink);background:var(--paper)}
+.specs>div{display:grid;grid-template-columns:70px 170px 1fr;border-bottom:1px solid var(--line)}
+.specs>div:last-child{border-bottom:0}
+.specs>div>*{padding:14px 16px}
+.specs .n{font:500 13px var(--mono);color:var(--ink-2);border-right:1px solid var(--line)}
+.specs .k{font:600 15px var(--sans);border-right:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font:500 12.5px var(--mono);border:1px solid var(--line);background:var(--paper-2);padding:3px 9px;border-radius:4px}
+
+/* опыт */
+.exp{display:grid;gap:14px}
+.spec{border:1.5px solid var(--ink);background:var(--paper)}
+.spec header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper-2)}
+.spec header b{font:700 13px var(--mono);color:var(--accent)}
+.spec header h3{margin:0;font:700 19px var(--sans);letter-spacing:-.01em}
+.spec header time{margin-left:auto;font:500 12px var(--mono);color:var(--ink-2)}
+.spec .body{padding:16px 18px;display:grid;grid-template-columns:150px 1fr;gap:10px 18px}
+.spec ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.spec li{padding-left:18px;position:relative}
+.spec li::before{content:"→";position:absolute;left:0;color:var(--accent);font-family:var(--mono)}
+.spec li strong{font-family:var(--mono);font-weight:700}
+
+/* хакатоны */
+.hacks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.req{border:1.5px solid var(--ink);background:var(--paper);font-family:var(--mono);font-size:13.5px;display:flex;flex-direction:column}
+.req .line{display:flex;gap:10px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line);background:var(--paper-2);overflow:hidden}
+.req .verb{font-weight:700;color:var(--accent-2)}
+.req .path{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-2)}
+.req .place{margin-left:auto;white-space:nowrap;font-weight:700;color:#fff;background:var(--accent);padding:2px 8px;border-radius:3px;font-size:12px}
+.req .place.p2{background:var(--ink);color:var(--paper)}
+.req .in{padding:14px 16px;display:grid;gap:8px;flex:1}
+.req h3{font:700 18px var(--sans);margin:0;letter-spacing:-.01em}
+.req .desc{font:400 15px var(--sans);color:var(--ink-2);margin:0}
+.req .row{display:grid;grid-template-columns:62px 1fr;gap:10px}
+.req .row>span:first-child{color:var(--ink-2)}
+.req .okk{color:var(--ok);font-weight:700}
+.req .row p{margin:0;font-family:var(--sans);font-size:14.5px}
+
+/* проекты */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prj{border:1.5px solid var(--ink);background:var(--paper);padding:18px;display:flex;flex-direction:column;gap:10px}
+.prj h3{margin:0;font:700 22px var(--sans);letter-spacing:-.02em}
+.prj p{margin:0;font-size:15px}
+.big{display:flex;gap:16px;flex-wrap:wrap;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:10px 0}
+.big div b{display:block;font:700 22px var(--mono);color:var(--accent)}
+.big div small{font:400 11.5px var(--mono);color:var(--ink-2)}
+.prj .stack{margin-top:auto;font:500 12px var(--mono);color:var(--ink-2)}
+.gd{margin-top:14px}
+
+/* заключение */
+.final{border:1.5px solid var(--ink);display:grid;grid-template-columns:1.4fr 1fr;background:var(--ink);color:var(--paper)}
+.final>div{padding:30px 28px}
+.final>div+div{border-left:1.5px solid color-mix(in srgb,var(--paper) 25%,transparent)}
+.final h2{font:700 clamp(28px,3.4vw,42px)/1.08 var(--sans);letter-spacing:-.03em;margin:10px 0 14px}
+.final .lbl{color:color-mix(in srgb,var(--paper) 65%,transparent)}
+.final .links{display:grid;gap:10px}
+.final .links a{display:flex;justify-content:space-between;align-items:center;font:500 15px var(--mono);text-decoration:none;border:1px solid color-mix(in srgb,var(--paper) 35%,transparent);border-radius:6px;padding:12px 14px;transition:background .15s,color .15s}
+.final .links a:hover{background:var(--paper);color:var(--ink)}
+.stampbox{display:inline-block;transform:rotate(-6deg);border:2px solid var(--accent);color:var(--accent);font:700 13px var(--mono);letter-spacing:.12em;padding:6px 12px;border-radius:4px;margin-top:8px}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1.5px solid var(--ink);margin:40px 0 0;padding:16px 0 40px;font:500 11.5px var(--mono);letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+
+/* появление */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero,.final{grid-template-columns:1fr}
+  .hero .name{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .final>div+div{border-left:0;border-top:1.5px solid color-mix(in srgb,var(--paper) 25%,transparent)}
+  .otk{grid-template-columns:repeat(2,1fr)}.stamp:nth-child(2){border-right:0}.stamp:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .hacks,.projects{grid-template-columns:1fr}
+  .top nav{display:none}
+}
+@media (max-width:640px){
+  .sheet{padding:0 16px}
+  .purpose,.spec .body{grid-template-columns:1fr}
+  .specs>div{grid-template-columns:48px 1fr}.specs .chips{grid-column:1/-1;border-top:1px dashed var(--line)}
+  .hero .name,.purpose{padding:22px 18px}
+  .fhead span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="sheet">
+    <b>БЕЛЯЙКИН Н.В. · ТП-2026</b>
+    <nav aria-label="Разделы">
+      <a href="#specs">3.0 Характеристики</a>
+      <a href="#exp">5.0 Опыт</a>
+      <a href="#hacks">6.0 Хакатоны</a>
+      <a href="#projects">7.0 Проекты</a>
+      <a href="#contact">Связь</a>
+    </nav>
+    <button class="theme" type="button" id="theme" aria-label="Переключить тему">◐</button>
+  </div>
+</header>
+
+<main class="sheet">
+  <div class="frame rv">
+    <div class="fhead"><span>Технический паспорт специалиста</span><span>Лист 1 · рев. 2026</span></div>
+    <div class="hero">
+      <div class="name">
+        <div class="lbl">Изделие / name</div>
+        <h1>Беляйкин Николай<span>Владимирович</span></h1>
+        <div class="cls">класс: <i>backend-разработчик</i> · модификация: графы, алгоритмы, данные</div>
+      </div>
+      <div class="meta">
+        <div><div class="lbl">Связь</div><p><a href="https://t.me/LOSTVOID" rel="noopener">tg @LOSTVOID</a></p></div>
+        <div><div class="lbl">Почта / код</div><p><a href="mailto:bnick2005@mail.ru">bnick2005@mail.ru</a><br><a href="https://github.com/prgbi4i" rel="noopener">github.com/prgbi4i</a></p></div>
+        <div><div class="lbl">Производство</div><p>МТУСИ · ИТ<br>выпуск 2027 · Москва</p></div>
+      </div>
+    </div>
+    <div class="purpose">
+      <div class="lbl">1.0 Назначение</div>
+      <p>Backend-разработчик на Python. Проектирую графовые модели, алгоритмы, симуляторы и пайплайны данных. <em>Каждое утверждение о результате подкрепляю тестом или метрикой</em>; в разработке опираюсь на мультиагентный подход: задача → архитектура → ревью → проверка.</p>
+    </div>
+    <div class="otk" aria-label="2.0 Испытания и отметки ОТК">
+      <div class="stamp"><b>1-е</b><span>Сбер × МТУСИ</span><small>кейс-чемпионат 2026</small></div>
+      <div class="stamp"><b>3-е</b><span>КосмоХакатон</span><small>Благовещенск · 100 000 ₽</small></div>
+      <div class="stamp"><b>7-е</b><span>КосмоХакатон</span><small>финал · 40 команд</small></div>
+      <div class="stamp"><b class="fin">ФИНАЛИСТ</b><span>МТУСИ × УПМ</span><small>стартап-интенсив 2026</small></div>
+    </div>
+  </div>
+
+  <section class="sec rv" id="specs">
+    <h2><span class="lbl">3.0</span>Технические характеристики</h2>
+    <div class="specs">
+      <div><span class="n">3.1</span><span class="k">Backend</span><div class="chips"><span>Python</span><span>FastAPI</span><span>Pydantic</span><span>SQLAlchemy</span><span>PostgreSQL</span><span>Docker</span><span>pytest</span><span>GitHub Actions</span></div></div>
+      <div><span class="n">3.2</span><span class="k">Алгоритмы</span><div class="chips"><span>графы</span><span>Optuna</span><span>BoTorch</span><span>CMA-ES</span><span>Numba</span><span>симуляция</span><span>PBO/CSCV</span><span>DSR</span></div></div>
+      <div><span class="n">3.3</span><span class="k">ML / AI</span><div class="chips"><span>PyTorch</span><span>RL (PPO)</span><span>Whisper</span><span>wav2vec2</span><span>CLIP</span><span>LLM-агенты</span></div></div>
+      <div><span class="n">3.4</span><span class="k">Frontend</span><div class="chips"><span>TypeScript</span><span>React</span><span>MapLibre GL</span></div></div>
+      <div><span class="n">3.5</span><span class="k">Прочее</span><div class="chips"><span>реверс протоколов и форматов</span><span>Unity / C#</span><span>Godot</span><span>Linux</span></div></div>
+      <div><span class="n">3.6</span><span class="k">Языки</span><div class="chips"><span>русский — родной</span><span>английский — A2</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="exp">
+    <h2 class="rv"><span class="lbl">5.0</span>Опыт</h2>
+    <div class="exp">
+      <article class="spec rv">
+        <header><b>SPEC-01</b><h3>Хайпо</h3><time>10.2026 — н.в.</time></header>
+        <div class="body"><span class="lbl">Backend · граф навыков и алгоритмы</span>
+          <ul><li>Backend-разработка платформы развития IT-специалистов: граф навыков и алгоритмы.</li></ul></div>
+      </article>
+      <article class="spec rv">
+        <header><b>SPEC-02</b><h3>Оптимизатор торговых стратегий</h3><time>04.2026 — 09.2026</time></header>
+        <div class="body"><span class="lbl">Backend · алгоритмы · стат. валидация · на заказ</span>
+          <ul>
+            <li>Многоуровневый оптимизатор: Grid → Optuna TPE/CMA-ES → BoTorch GP + TuRBO → walk-forward; Numba-ядра и предрасчёт тензора расстояний KNN — <strong>×3,3</strong> на оценку.</li>
+            <li>Слой защиты от переобучения по первоисточникам: PBO/CSCV, Deflated Sharpe, haircut Harvey–Liu + BHY, null-тесты, holdout с пре-регистрацией.</li>
+            <li>Детерминированные бейзлайны и единая регрессия на <strong>422</strong> проверки.</li>
+          </ul></div>
+      </article>
+      <article class="spec rv">
+        <header><b>SPEC-03</b><h3>HiveMind · совместный редактор документов</h3><time>06.2026 — 07.2026</time></header>
+        <div class="body"><span class="lbl">Python & Core Fullstack · команда</span>
+          <ul>
+            <li>Converter-service на FastAPI: TXT / MD / DOCX / ODT / PDF ↔ Tiptap, OCR для сканов; round-trip DOCX и ODT — <strong>26/26</strong> фич (было 11/26).</li>
+            <li>docker-compose всей системы (PostgreSQL, Spring, конвертер, Hocuspocus, nginx), шеринг с ролями, папки, корзина, подтверждение почты; <strong>139 из 172</strong> коммитов.</li>
+          </ul></div>
+      </article>
+      <article class="spec rv">
+        <header><b>SPEC-04</b><h3>Торговый слой и порт индикатора</h3><time>05.2026 — 07.2026</time></header>
+        <div class="body"><span class="lbl">Backend · торговая инфраструктура · на заказ</span>
+          <ul>
+            <li>Порт индикатора Lorentzian Classification с Pine Script на Python: исправил 10+ расхождений — совпадение сигналов <strong>98,46%</strong> (5253 из 5335 баров).</li>
+            <li>Торговый слой Binance Futures: исполнение ордеров, атомарное хранилище состояния, журнал сделок, live-раннер со сверкой позиции и идемпотентностью.</li>
+          </ul></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="hacks">
+    <h2 class="rv"><span class="lbl">6.0</span>Хакатоны</h2>
+    <div class="hacks">
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/sber-mtuci/invest-spasibo</span><span class="place">1-Е МЕСТО</span></div>
+        <div class="in"><h3>InvestSpasibo · Сбер × МТУСИ</h3>
+          <p class="desc">Мобильный симулятор инвестиций: обучение, виртуальные сделки и рыночные данные MOEX.</p>
+          <div class="row"><span>200 OK</span><p>Учебный MVP: котировки, рыночные и лимитные заявки, портфель, квизы.</p></div>
+          <div class="row"><span>stack</span><p class="mono">React · Zustand · MOEX ISS API</p></div></div>
+      </article>
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/cosmohack/blagoveshchensk/hydrowatch</span><span class="place">3-Е МЕСТО</span></div>
+        <div class="in"><h3>HydroWatch Amur · КосмоХакатон</h3>
+          <p class="desc">Спутниковый мониторинг паводков на Амуре: маски воды, зоны затопления, оценка площадей.</p>
+          <div class="row"><span>body</span><p>Backend и аналитика качества: разбор метрики Eval Score, план улучшений, подготовка защиты.</p></div>
+          <div class="row"><span class="okk">200 OK</span><p>3-е место, приз 100 000 ₽.</p></div></div>
+      </article>
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/cosmohack/final/suloy</span><span class="place p2">7-Е МЕСТО</span></div>
+        <div class="in"><h3>Сулой · всероссийский финал КосмоХакатона</h3>
+          <p class="desc">Мониторинг макропластика в морских акваториях по спутниковым и полевым данным.</p>
+          <div class="row"><span>body</span><p>Владелец frontend: карта, слои наблюдений, статистика зон, PDF-отчёт; дизайн-система (32 компонента). ML-аудит: нашёл утечку train↔val и 63 дубля сцен.</p></div>
+          <div class="row"><span class="okk">200 OK</span><p>7-е из 40 команд; 235 коммитов за 3 дня.</p></div></div>
+      </article>
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/mtuci-gov/hvac-cmms</span><span class="place p2">ФИНАЛИСТ</span></div>
+        <div class="in"><h3>HVAC CMMS · МТУСИ × УПМ</h3>
+          <p class="desc">Веб-система учёта оборудования и техобслуживания отопления, вентиляции и кондиционирования.</p>
+          <div class="row"><span>body</span><p>Backend: переоткрытие и доработка нарядов, DTO, unit- и e2e-тесты; модуль склада расходников.</p></div>
+          <div class="row"><span>stack</span><p class="mono">NestJS · Prisma · PostgreSQL · Docker</p></div></div>
+      </article>
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/inter-rao/bpmn-editor</span><span class="place p2">УЧАСТНИК</span></div>
+        <div class="in"><h3>AI-редактор BPMN · Энергохакатон Интер РАО</h3>
+          <p class="desc">Браузерный редактор бизнес-процессов с AI-генерацией BPMN-схем по тексту.</p>
+          <div class="row"><span>body</span><p>Repair-цикл генерации, проверка по XSD OMG BPMN 2.0.2, раскладка дорожек, CI на Linux и Windows.</p></div>
+          <div class="row"><span class="okk">200 OK</span><p>82 коммита, ~9,9 тыс. строк, 6 влитых PR.</p></div></div>
+      </article>
+      <article class="req rv" style="justify-content:center">
+        <div class="in" style="place-content:center;text-align:center">
+          <p class="lbl">Итог раздела 6.0</p>
+          <h3 style="font-size:44px;font-family:var(--mono)">5 кейсов</h3>
+          <p class="desc">места: 1 · 3 · 7 · финал</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <h2 class="rv"><span class="lbl">7.0</span>Проекты</h2>
+    <div class="projects">
+      <article class="prj rv">
+        <span class="lbl">Изд. 06 · исследование</span><h3>AutobattlerAI</h3>
+        <p>Симулятор автобаттлера с нуля и RL-агент поверх него. Разобрал сетевой протокол игры, откалибровал движок по 280 реальным боям.</p>
+        <div class="big"><div><b>81,8%</b><small>точность прогноза победителя</small></div><div><b>52,8 млн</b><small>решений PPO-агента</small></div></div>
+        <span class="stack">Python · PyTorch · PPO · Unity · 1030 тестов</span>
+      </article>
+      <article class="prj rv">
+        <span class="lbl">Изд. 07 · медиа</span><h3>Видео под трек</h3>
+        <p>Пайплайн «трек → ролик» с субтитрами для музыкального лейбла: wav2vec2-CTC + Demucs, Whisper, подбор фона по CLAP/CLIP.</p>
+        <div class="big"><div><b>0,075 с</b><small>ошибка выравнивания (было 0,30 с)</small></div></div>
+        <span class="stack">Python · transformers · ffmpeg · Remotion</span>
+      </article>
+      <article class="prj rv">
+        <span class="lbl">Изд. 08 · AI-импульс 2.0</span><h3>Restore Assistant</h3>
+        <p>Персональный ассистент с памятью на GigaChat.</p>
+        <div class="big"><div><b>1233</b><small>теста</small></div><div><b>22/22</b><small>golden-вопроса</small></div></div>
+        <span class="stack">FastAPI · HTMX · SQLite · GigaChat · Docker</span>
+      </article>
+    </div>
+    <article class="spec gd rv">
+      <header><b>SPEC-05</b><h3>Геймдев</h3><time>04.2026 — 06.2026</time></header>
+      <div class="body"><span class="lbl">Gameplay & tools · инди-команды</span>
+        <ul>
+          <li>Unity 6 / C#: архитектура idle-игры на сервисах и Composition Root, прогрессия, сохранения, UI и локализация; основной автор кода — <strong>179 из 293</strong> коммитов, сборка под Steam.</li>
+          <li>Godot 4 / GDScript: 2D-игра на геймджеме за 3 дня — от идеи до готовой сборки.</li>
+        </ul></div>
+    </article>
+  </section>
+
+  <section class="sec rv" id="contact">
+    <div class="final">
+      <div>
+        <span class="lbl">Заключение</span>
+        <h2>Годен к эксплуатации в backend-команде.</h2>
+        <p style="margin:0;opacity:.8">Открыт к стажировке, работе и хакатонам. Пишите в Telegram — отвечаю быстро.</p>
+        <span class="stampbox">ОТК · ПРИНЯТО</span>
+      </div>
+      <div>
+        <span class="lbl">Связь</span>
+        <div class="links" style="margin-top:12px">
+          <a href="https://t.me/LOSTVOID" rel="noopener">Telegram · @LOSTVOID <span>↗</span></a>
+          <a href="mailto:bnick2005@mail.ru">bnick2005@mail.ru <span>↗</span></a>
+          <a href="https://github.com/prgbi4i" rel="noopener">github.com/prgbi4i <span>↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><span>Разработал: Беляйкин Н.В.</span><span>Инструменты: мягкие лапки · одобрено пушистыми экспертами</span><span>ТП-2026 · лист 1/1</span></footer>
+</main>
+
+<script>
+(() => {
+  const root = document.documentElement, btn = document.getElementById("theme");
+  try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+  btn.addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  });
+  const els = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {rootMargin: "0px 0px -8% 0px"});
+  els.forEach(e => io.observe(e));
+})();
+</script>
+</body>
+</html>
