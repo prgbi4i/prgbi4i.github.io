@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Беляйкин Николай — backend-разработчик</title>
-<meta name="description" content="Backend-разработчик на Python: графовые модели, алгоритмы, симуляторы и пайплайны данных. Хакатоны: 1-е место Сбер × МТУСИ, 3-е место КосмоХакатон.">
+<meta name="description" content="Backend-разработчик на Python: графовые модели, алгоритмы, симуляторы и пайплайны данных. Хакатоны: 1-е место Сбер × МТУСИ, 3-е места Смарткон × iQOO и КосмоХакатон.">
 <meta property="og:title" content="Беляйкин Николай — технический паспорт специалиста">
 <meta property="og:description" content="Backend · графы · алгоритмы · данные. Python, FastAPI, PostgreSQL, Docker.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +66,7 @@ a{color:inherit}
 .purpose p em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 30%,transparent) 0)}
 
 /* ОТК */
-.otk{display:grid;grid-template-columns:repeat(4,1fr)}
+.otk{display:grid;grid-template-columns:repeat(5,1fr)}
 .stamp{padding:22px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
 .stamp:last-child{border-right:0}
 .stamp b{font:700 30px/1 var(--mono);letter-spacing:-.02em;color:var(--accent)}
@@ -149,7 +149,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border
   .hero,.final{grid-template-columns:1fr}
   .hero .name{border-right:0;border-bottom:1.5px solid var(--ink)}
   .final>div+div{border-left:0;border-top:1.5px solid color-mix(in srgb,var(--paper) 25%,transparent)}
-  .otk{grid-template-columns:repeat(2,1fr)}.stamp:nth-child(2){border-right:0}.stamp:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .otk{grid-template-columns:repeat(2,1fr)}.stamp:nth-child(2n){border-right:0}.stamp:nth-child(-n+4){border-bottom:1px solid var(--line)}.stamp:last-child{grid-column:1/-1}
   .hacks,.projects{grid-template-columns:1fr}
   .top nav{display:none}
 }
@@ -200,6 +200,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border
     </div>
     <div class="otk" aria-label="2.0 Испытания и отметки ОТК">
       <div class="stamp"><b>1-е</b><span>Сбер × МТУСИ</span><small>кейс-чемпионат 2026</small></div>
+      <div class="stamp"><b>3-е</b><span>Смарткон × iQOO</span><small>Чертоги · Android · 2026</small></div>
       <div class="stamp"><b>3-е</b><span>КосмоХакатон</span><small>Благовещенск · 100 000 ₽</small></div>
       <div class="stamp"><b>7-е</b><span>КосмоХакатон</span><small>финал · 40 команд</small></div>
       <div class="stamp"><b class="fin">ФИНАЛИСТ</b><span>МТУСИ × УПМ</span><small>стартап-интенсив 2026</small></div>
@@ -292,11 +293,12 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border
           <div class="row"><span>body</span><p>Repair-цикл генерации, проверка по XSD OMG BPMN 2.0.2, раскладка дорожек, CI на Linux и Windows.</p></div>
           <div class="row"><span class="okk">200 OK</span><p>82 коммита, ~9,9 тыс. строк, 6 влитых PR.</p></div></div>
       </article>
-      <article class="req rv" style="justify-content:center">
-        <div class="in" style="place-content:center;text-align:center">
-          <p class="lbl">Итог раздела 6.0</p>
-          <h3 style="font-size:44px;font-family:var(--mono)">5 кейсов</h3>
-          <p class="desc">места: 1 · 3 · 7 · финал</p></div>
+      <article class="req rv">
+        <div class="line"><span class="verb">POST</span><span class="path">/smartcon/iqoo/chertogi</span><span class="place">3-Е МЕСТО</span></div>
+        <div class="in"><h3>Чертоги · Смарткон × iQOO</h3>
+          <p class="desc">Android-приложение «учи конспект, пока идёшь»: конспект утром — дорога к вечеру.</p>
+          <div class="row"><span class="okk">200 OK</span><p>3-е место. Приложение доступно для установки.</p></div>
+          <div class="row"><span>links</span><p class="mono"><a href="https://prgbi4i.github.io/chertogi/" rel="noopener">лендинг ↗</a> · <a href="https://github.com/prgbi4i/chertogi/releases/latest/download/Chertogi.apk" rel="noopener">APK ↗</a> · <a href="https://github.com/prgbi4i/chertogi" rel="noopener">код ↗</a></p></div></div>
       </article>
     </div>
   </section>
